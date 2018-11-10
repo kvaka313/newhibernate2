@@ -8,6 +8,7 @@
         <class>com.infopulse.entity.Order</class>
         <class>com.infopulse.entity.Passport</class>
         <class>com.infopulse.entity.Bank</class>
+        <class>com.infopulse.entity.BadClient</class>
         <properties>
             <property name="hibernate.connection.driver_class" value = "org.postgresql.Driver"/>
             <property name="hibernate.connection.username" value="postgres"/>

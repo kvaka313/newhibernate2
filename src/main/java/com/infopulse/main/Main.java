@@ -58,7 +58,10 @@ public class Main {
           System.out.println(client.getSurename());
           System.out.println(client.getAddress().getCountry());
       }
-
+      Client badClient = new BadClient();
+      badClient.setSurename("Ivanov");
+      badClient.setName("Ivan");
+      clientDao.insertClient(badClient);
       bankDao.deletebank(bank1.getId());
     }
 }

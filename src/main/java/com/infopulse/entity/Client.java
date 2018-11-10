@@ -16,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="clients")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name="Typeclient", discriminatorType=DiscriminatorType.STRING, length=10)
+//@DiscriminatorValue("CLIENT")
 public class Client {
     @Id
     @GenericGenerator(name="increment", strategy = "increment")
