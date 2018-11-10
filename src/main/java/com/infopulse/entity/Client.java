@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="clients")
+@Table(name="clients", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "surename"}))
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 //@DiscriminatorColumn(name="Typeclient", discriminatorType=DiscriminatorType.STRING, length=10)
 //@DiscriminatorValue("CLIENT")

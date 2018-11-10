@@ -2,6 +2,7 @@ package com.infopulse.factory;
 
 import com.infopulse.dao.BankDao;
 import com.infopulse.dao.ClientDao;
+import com.infopulse.dao.DepositDao;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.Persistence;
@@ -13,6 +14,7 @@ public class Factory {
 
     private ClientDao clientDao;
     private BankDao bankDao;
+    private DepositDao depositDao;
     private Factory(){
         sessionFactory=(SessionFactory) Persistence
                 .createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
@@ -29,6 +31,14 @@ public class Factory {
         }
         clientDao =new ClientDao(sessionFactory);
         return clientDao;
+    }
+
+    public synchronized DepositDao getDepositDao(){
+        if(depositDao!=null) {
+            return depositDao;
+        }
+        depositDao =new DepositDao(sessionFactory);
+        return depositDao;
     }
 
     public synchronized BankDao getBankDao(){

@@ -2,6 +2,7 @@ package com.infopulse.main;
 
 import com.infopulse.dao.BankDao;
 import com.infopulse.dao.ClientDao;
+import com.infopulse.dao.DepositDao;
 import com.infopulse.entity.*;
 import com.infopulse.factory.Factory;
 
@@ -63,5 +64,21 @@ public class Main {
       badClient.setName("Ivan");
       clientDao.insertClient(badClient);
       bankDao.deletebank(bank1.getId());
+
+      Deposit deposit =new Deposit();
+      deposit.setBank_id(10L);
+      deposit.setClient_id(20L);
+
+      DepositDao depositDao = Factory.getInstance().getDepositDao();
+      depositDao.insertDeposit(deposit);
+
+      OtherDeposit otherDeposit =new OtherDeposit();
+      OtherCompositKey otherCompositKey =new OtherCompositKey();
+      otherCompositKey.setClient_id(100L);
+      otherCompositKey.setBank_id(23L);
+
+      otherDeposit.setCompositKey(otherCompositKey);
+
+      depositDao.insertDeposit(otherDeposit);
     }
 }
