@@ -25,6 +25,15 @@ public class ClientDao {
         entityManager.close();
     }
 
+    public void updateClient(Client c, Order... orders){
+        EntityManager entityManager =sessionFactory.createEntityManager();
+        c.setOrders(Arrays.asList(orders));
+        entityManager.getTransaction().begin();
+        entityManager.merge(c);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
     public List<Client> getAll(){
         EntityManager entityManager =sessionFactory.createEntityManager();
         entityManager.getTransaction().begin();

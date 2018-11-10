@@ -49,6 +49,7 @@ public class Main {
 
       ClientDao clientDao = Factory.getInstance().getClientDao();
       clientDao.insertClient(c, order1, order2);
+      clientDao.updateClient(c);
 
       bank1.setClients(Arrays.asList(c));
       bank2.setClients(Arrays.asList(c));

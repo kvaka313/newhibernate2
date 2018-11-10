@@ -29,6 +29,10 @@ public class Client {
     @Basic
     private String name;
 
+    @Column(name = "client_id",nullable = true, unique = true, length = 20)
+    @Basic
+    private String clientId;
+
     @Lob
     @Basic
     @Column(name = "surename",nullable = false, unique = false, length = 20)
@@ -45,4 +49,12 @@ public class Client {
 
     @ManyToMany(fetch = FetchType.LAZY)
     List<Bank> banks;
+
+    @PostPersist
+    @PostLoad
+    public void onSave(){
+        if(clientId == null){
+           clientId = id.toString();
+        }
+    }
 }
