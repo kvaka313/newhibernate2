@@ -1,11 +1,11 @@
 package com.infopulse.main;
 
+import com.infopulse.dao.BankDao;
 import com.infopulse.dao.ClientDao;
-import com.infopulse.entity.Address;
-import com.infopulse.entity.Client;
-import com.infopulse.entity.Order;
+import com.infopulse.entity.*;
 import com.infopulse.factory.Factory;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
@@ -26,13 +26,39 @@ public class Main {
       order2.setOrderName("order2");
       order2.setClient(c);
 
+      Passport passport =new Passport();
+      passport.setPassportNumber("HH7797979");
+      c.setPassport(passport);
+      passport.setClient(c);
+
+
+      Bank bank1=new Bank();
+      bank1.setBankName("bank1");
+
+
+      Bank bank2 = new Bank();
+      bank2.setBankName("bank2");
+
+
+      c.setBanks(Arrays.asList(bank1,bank2));
+
+      BankDao bankDao = Factory.getInstance().getBankDao();
+      bank1=bankDao.insertBank(bank1);
+      bank2=bankDao.insertBank(bank2);
+
       ClientDao clientDao = Factory.getInstance().getClientDao();
       clientDao.insertClient(c, order1, order2);
+
+      bank1.setClients(Arrays.asList(c));
+      bank2.setClients(Arrays.asList(c));
+
       List<Client> clients = clientDao.getAll();
       for(Client client:clients){
           System.out.println(client.getName());
           System.out.println(client.getSurename());
           System.out.println(client.getAddress().getCountry());
       }
+
+      bankDao.deletebank(bank1.getId());
     }
 }

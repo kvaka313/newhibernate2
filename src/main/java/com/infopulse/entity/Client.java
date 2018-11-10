@@ -36,4 +36,10 @@ public class Client {
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     List<Order> orders;
+
+    @OneToOne(mappedBy = "client", orphanRemoval = true, cascade = CascadeType.ALL)
+    private Passport passport;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    List<Bank> banks;
 }

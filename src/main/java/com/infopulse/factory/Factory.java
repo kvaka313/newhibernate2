@@ -1,5 +1,6 @@
 package com.infopulse.factory;
 
+import com.infopulse.dao.BankDao;
 import com.infopulse.dao.ClientDao;
 import org.hibernate.SessionFactory;
 
@@ -11,6 +12,7 @@ public class Factory {
     private SessionFactory sessionFactory;
 
     private ClientDao clientDao;
+    private BankDao bankDao;
     private Factory(){
         sessionFactory=(SessionFactory) Persistence
                 .createEntityManagerFactory( "org.hibernate.tutorial.jpa" );
@@ -27,6 +29,14 @@ public class Factory {
         }
         clientDao =new ClientDao(sessionFactory);
         return clientDao;
+    }
+
+    public synchronized BankDao getBankDao(){
+        if(bankDao!=null) {
+            return bankDao;
+        }
+        bankDao =new BankDao(sessionFactory);
+        return bankDao;
     }
 
 }
