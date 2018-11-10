@@ -1,9 +1,11 @@
 package com.infopulse.dao;
 
 import com.infopulse.entity.Client;
+import com.infopulse.entity.Order;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClientDao {
@@ -14,8 +16,9 @@ public class ClientDao {
         this.sessionFactory = sessionFactory;
     }
 
-    public void insertClient(Client c){
+    public void insertClient(Client c, Order... orders){
         EntityManager entityManager =sessionFactory.createEntityManager();
+        c.setOrders(Arrays.asList(orders));
         entityManager.getTransaction().begin();
         entityManager.persist(c);
         entityManager.getTransaction().commit();

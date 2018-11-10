@@ -3,6 +3,7 @@ package com.infopulse.main;
 import com.infopulse.dao.ClientDao;
 import com.infopulse.entity.Address;
 import com.infopulse.entity.Client;
+import com.infopulse.entity.Order;
 import com.infopulse.factory.Factory;
 
 import java.util.List;
@@ -16,8 +17,14 @@ public class Main {
       address.setCountry("Ukraine");
       address.setCity("Kiev");
       c.setAddress(address);
+      Order order1 = new Order();
+      order1.setOrderName("order1");
+
+      Order order2 =new Order();
+      order2.setOrderName("order2");
+
       ClientDao clientDao = Factory.getInstance().getClientDao();
-      clientDao.insertClient(c);
+      clientDao.insertClient(c, order1, order2);
       List<Client> clients = clientDao.getAll();
       for(Client client:clients){
           System.out.println(client.getName());
