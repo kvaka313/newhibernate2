@@ -23,4 +23,8 @@ public class Order {
     @Column(name = "order_name",nullable = false, unique = false, length = 20)
     @Basic
     private String orderName;
+
+    @ManyToOne
+    @JoinColumn(name = "myclient_id", referencedColumnName = "id")
+    Client client;
 }

@@ -34,6 +34,6 @@ public class Client {
     @Type(type = "com.infopulse.entity.type.AddressType")
     private Address address;
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL)
     List<Order> orders;
 }

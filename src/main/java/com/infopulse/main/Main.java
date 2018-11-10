@@ -19,9 +19,12 @@ public class Main {
       c.setAddress(address);
       Order order1 = new Order();
       order1.setOrderName("order1");
+      order1.setClient(c);
+
 
       Order order2 =new Order();
       order2.setOrderName("order2");
+      order2.setClient(c);
 
       ClientDao clientDao = Factory.getInstance().getClientDao();
       clientDao.insertClient(c, order1, order2);
