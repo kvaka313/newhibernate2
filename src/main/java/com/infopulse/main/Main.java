@@ -89,6 +89,9 @@ public class Main {
       bankDao.getBanksByClientName("Vasya")
               .forEach(bank ->System.out.println(bank.getBankName()));
 
+      bankDao.getBanksByClientNameCriteriaApi("Vasya")
+              .forEach(bank ->System.out.println(bank.getBankName()));
+
       List<ClientSum> clientSums = clientDao.getOrderInformation();
       clientSums.forEach(System.out::println);
       //clientSums.forEach(item -> System.out.println(item));
