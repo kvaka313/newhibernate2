@@ -59,6 +59,7 @@ public class Main {
           System.out.println(client.getName());
           System.out.println(client.getSurename());
           System.out.println(client.getAddress().getCountry());
+          System.out.println(client.getNameSurename());
       }
       Client badClient = new BadClient();
       badClient.setSurename("Ivanov");
@@ -81,5 +82,8 @@ public class Main {
       otherDeposit.setCompositKey(otherCompositKey);
 
       depositDao.insertDeposit(otherDeposit);
+
+      bankDao.getBanksByClientName("Vasya")
+              .forEach(bank ->System.out.println(bank.getBankName()));
     }
 }

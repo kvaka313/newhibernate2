@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -56,5 +57,14 @@ public class Client {
         if(clientId == null){
            clientId = id.toString();
         }
+        nameSurename = getName()+"-"+getSurename();
     }
+
+//    @Formula("concat(name,'-', surename)")
+    private String nameSurename;
+
+//    public String getNameSurename(){
+//        return getName()+"-"+getSurename();
+//    }
+
 }
