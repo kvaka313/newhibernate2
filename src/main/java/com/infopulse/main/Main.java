@@ -6,6 +6,7 @@ import com.infopulse.dao.DepositDao;
 import com.infopulse.entity.*;
 import com.infopulse.factory.Factory;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,11 +21,13 @@ public class Main {
       c.setAddress(address);
       Order order1 = new Order();
       order1.setOrderName("order1");
+      order1.setTotal(new BigDecimal("655"));
       order1.setClient(c);
 
 
       Order order2 =new Order();
       order2.setOrderName("order2");
+      order2.setTotal(new BigDecimal("345"));
       order2.setClient(c);
 
       Passport passport =new Passport();
@@ -49,7 +52,7 @@ public class Main {
 
       ClientDao clientDao = Factory.getInstance().getClientDao();
       clientDao.insertClient(c, order1, order2);
-      clientDao.updateClient(c);
+      //clientDao.updateClient(c);
 
       bank1.setClients(Arrays.asList(c));
       bank2.setClients(Arrays.asList(c));
@@ -65,7 +68,7 @@ public class Main {
       badClient.setSurename("Ivanov");
       badClient.setName("Ivan");
       clientDao.insertClient(badClient);
-      bankDao.deletebank(bank1.getId());
+     // bankDao.deletebank(bank1.getId());
 
       Deposit deposit =new Deposit();
       deposit.setBank_id(10L);
@@ -85,5 +88,9 @@ public class Main {
 
       bankDao.getBanksByClientName("Vasya")
               .forEach(bank ->System.out.println(bank.getBankName()));
+
+      List<ClientSum> clientSums = clientDao.getOrderInformation();
+      clientSums.forEach(System.out::println);
+      //clientSums.forEach(item -> System.out.println(item));
     }
 }

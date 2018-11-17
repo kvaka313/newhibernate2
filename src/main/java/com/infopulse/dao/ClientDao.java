@@ -1,10 +1,12 @@
 package com.infopulse.dao;
 
 import com.infopulse.entity.Client;
+import com.infopulse.entity.ClientSum;
 import com.infopulse.entity.Order;
 import org.hibernate.SessionFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +42,17 @@ public class ClientDao {
         List<Client> clients = entityManager.createQuery("from Client", Client.class).getResultList();
         entityManager.close();
         return clients;
+    }
+
+    public List<ClientSum> getOrderInformation(){
+        EntityManager entityManager =sessionFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Query query = entityManager
+                .createQuery("select new com.infopulse.entity.ClientSum(cl.name, sum(ord.total)) from Client cl inner join cl.orders as ord group by cl.name having sum(ord.total)>100", ClientSum.class);
+        List<ClientSum> clientSums = query.getResultList();
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return clientSums;
     }
 
 }

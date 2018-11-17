@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -23,6 +24,10 @@ public class Order {
     @Column(name = "order_name",nullable = false, unique = false, length = 20)
     @Basic
     private String orderName;
+
+    @Column(name = "order_sum",nullable = false, unique = false)
+    @Basic
+    private BigDecimal total;
 
     @ManyToOne
     @JoinColumn(name = "myclient_id", referencedColumnName = "id")
