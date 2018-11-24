@@ -49,4 +49,8 @@ public class Factory {
         return bankDao;
     }
 
+    public void close(){
+        sessionFactory.close();
+    }
+
 }

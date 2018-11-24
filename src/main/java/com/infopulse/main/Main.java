@@ -5,6 +5,7 @@ import com.infopulse.dao.ClientDao;
 import com.infopulse.dao.DepositDao;
 import com.infopulse.entity.*;
 import com.infopulse.factory.Factory;
+import net.sf.ehcache.CacheManager;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -94,6 +95,12 @@ public class Main {
 
       List<ClientSum> clientSums = clientDao.getOrderInformation();
       clientSums.forEach(System.out::println);
+
+      int size = CacheManager.ALL_CACHE_MANAGERS.get(0)
+                .getCache("com.infopulse.entity.Client").getSize();
+      System.out.println(size);
+      Factory factory = Factory.getInstance();
+      factory.close();
       //clientSums.forEach(item -> System.out.println(item));
     }
 }
