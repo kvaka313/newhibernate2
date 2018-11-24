@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "myregion")
 @Entity
 @Table(name="clients", uniqueConstraints = @UniqueConstraint(columnNames = {"name", "surename"}))
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)

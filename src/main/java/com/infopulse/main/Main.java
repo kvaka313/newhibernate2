@@ -96,10 +96,18 @@ public class Main {
       List<ClientSum> clientSums = clientDao.getOrderInformation();
       clientSums.forEach(System.out::println);
 
-      int size = CacheManager.ALL_CACHE_MANAGERS.get(0)
-                .getCache("com.infopulse.entity.Client").getSize();
-      System.out.println(size);
+//      int size = CacheManager.ALL_CACHE_MANAGERS.get(0)
+//                .getCache("com.infopulse.entity.Client").getSize();
+   //   System.out.println(size);
       Factory factory = Factory.getInstance();
+
+      boolean element = factory.getSessionFactory()
+              .getCache().containsEntity(Client.class, badClient.getId());
+      System.out.println(element);
+      factory.getSessionFactory().getCache().evictRegion("myregion");
+      element = factory.getSessionFactory()
+              .getCache().containsEntity(Client.class, badClient.getId());
+      System.out.println(element);
       factory.close();
       //clientSums.forEach(item -> System.out.println(item));
     }

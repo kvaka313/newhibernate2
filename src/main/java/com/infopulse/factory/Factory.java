@@ -53,4 +53,8 @@ public class Factory {
         sessionFactory.close();
     }
 
+    public SessionFactory getSessionFactory(){
+        return sessionFactory;
+    }
+
 }
